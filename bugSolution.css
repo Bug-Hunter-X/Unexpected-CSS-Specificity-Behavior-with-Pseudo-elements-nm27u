@@ -1,0 +1,60 @@
+To resolve this issue, we need to ensure the `.element.special` selector is more specific than the `.element::before` selector.  There are several ways to achieve this:
+
+**1. Increase Specificity of `.element.special`:
+
+```css
+.element {
+  color: blue;
+}
+
+.element::before {
+  content: "prefix ";
+  color: red;
+}
+
+.element.special {
+  color: green !important;
+}
+```
+
+Using `!important` is generally discouraged due to potential maintainability issues; it should be used sparingly. 
+
+**2. Use a More Specific Selector for the `.special` class or use a parent element
+
+```css
+.container .element {
+  color: blue;
+}
+
+.container .element::before {
+  content: "prefix ";
+  color: red;
+}
+
+.container .element.special {
+  color: green;
+}
+```
+
+Adding an additional parent selector to `.element.special` increases its specificity. This method helps to avoid the need for `!important` and enhances the readability and maintainability of your code.
+
+**3. Separate Styles:
+
+Instead of trying to override styles, it's sometimes better to use separate style rules:
+
+```css
+.element {
+  color: blue;
+}
+
+.element::before {
+  content: "prefix ";
+  color: red;
+}
+
+.element.special::before {
+  content: "special prefix ";
+  color: green;
+}
+```
+Choose the solution that best fits your coding style and project requirements, prioritizing code readability and maintainability.
