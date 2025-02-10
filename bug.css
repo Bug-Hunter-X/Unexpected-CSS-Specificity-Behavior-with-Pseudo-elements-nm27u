@@ -1,0 +1,18 @@
+The following CSS code snippet demonstrates an unusual issue where a pseudo-element is unexpectedly overriding a class style due to specificity rules:
+
+```css
+.element {
+  color: blue;
+}
+
+.element::before {
+  content: "prefix ";
+  color: red;
+}
+
+.element.special {
+  color: green;
+}
+```
+
+In this scenario, applying the `.special` class to the element will not result in a green text color as expected. The `::before` pseudo-element's more specific selector overrides the `color` property set by `.element.special`.  This is counter-intuitive to how many developers expect specificity to work, as the class selector is normally more specific than a pseudo-element selector in this situation.
